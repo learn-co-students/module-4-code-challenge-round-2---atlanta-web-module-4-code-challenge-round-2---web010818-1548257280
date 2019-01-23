@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import TransactionsList from './TransactionsList'
 import Search from './Search'
-import {transactions} from '../transactionsData'
+// import {transactions} from '../transactionsData'
 
 class AccountContainer extends Component {
-
   constructor() {
     super()
 
@@ -25,11 +24,11 @@ class AccountContainer extends Component {
   }
 
   handleChange = (event) => {
-    let { searchedTransactions } = this.state 
+    let { transactions } = this.state 
     this.setState({
       searchedWord: event.target.value, 
-      searchedTransactions: transactions.filter((trans) => {
-        return trans.description.includes(event.target.value)
+      searchedTransactions: transactions.filter(({ description, category }) => {
+        return description.toLowerCase().includes(event.target.value) || category.toLowerCase().includes(event.target.value)
       })
     })
   }
