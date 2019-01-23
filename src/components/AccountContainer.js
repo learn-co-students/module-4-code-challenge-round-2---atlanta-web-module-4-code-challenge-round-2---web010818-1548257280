@@ -27,7 +27,7 @@ class AccountContainer extends Component {
 
   render() {
 
-    let filterAccount = this.state.bank.filter(account => account.description.includes(this.state.search) || account.category.includes(this.state.search))
+    let filterAccount = this.state.bank.filter(account => account.description.toLowerCase().includes(this.state.search) || account.category.toLowerCase().includes(this.state.search))
 
     return (
       <div>
