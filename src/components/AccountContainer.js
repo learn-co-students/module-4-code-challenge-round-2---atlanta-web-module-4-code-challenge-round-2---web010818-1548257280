@@ -8,7 +8,8 @@ const API = `https://boiling-brook-94902.herokuapp.com/transactions`
 class AccountContainer extends Component {
 
   state = {
-    bank: []
+    bank: [],
+    search: ''
   }
 
     // get a default state working with the data imported from TransactionsData
@@ -21,15 +22,17 @@ class AccountContainer extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({data: event.target.value})
+    this.setState({search: event.target.value})
   }
 
   render() {
-    console.log(this.state.bank)
+
+    let filterAccount = this.state.bank.filter(account => account.description.includes(this.state.search) || account.category.includes(this.state.search))
+
     return (
       <div>
-        <Search />
-        <TransactionsList bank={this.state.bank} />
+        <Search search={this.state.search} handleChange={this.handleChange} />
+        <TransactionsList bank={filterAccount} />
       </div>
     )
   }
